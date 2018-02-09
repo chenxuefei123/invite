@@ -19,38 +19,37 @@ class InviteRequest(models.Model):
 
     def __unicode__(self):
         return self.email
-    
-    
+
 class Invitation(models.Model):
     """
     Invitation model
     """
     code = models.CharField(blank=True, max_length=6,
-                            verbose_name=_(u"Invitation code"))    
-    user = models.ForeignKey(User, verbose_name=_(u'Invitor'), 
+                            verbose_name=_(u"Invitation code"))
+    user = models.ForeignKey(User, verbose_name=_(u'Invitor'),
                              related_name='invitations', on_delete=models.CASCADE)
     email = models.EmailField(verbose_name=_(u"Email"))
     date_invited = models.DateTimeField(default=datetime.datetime.now,
                                         verbose_name=_(u'date invited'))
-    
+
     class Meta:
         verbose_name = _(u'Invitation')
         verbose_name_plural = _(u'Invitations')
         ordering = ('-date_invited',)
-    
+
     def __unicode__(self):
         return _('%(username)s invited %(email)s on %(date)s') % {
             'username': self.user.username,
             'email': self.email,
             'date': str(self.date_invited.date()),
         }
-    
-    def save(self,*args, **kwargs):
+
+    def save(self, *args, **kwargs):
         if not self.id:
-            self.code = ''.join(random.sample(DEFAULT_ALPHABET, 6)) 
+            self.code = ''.join(random.sample(DEFAULT_ALPHABET, 6))
             self.user.invitation_use.add_sent()
         super(Invitation, self).save(*args, **kwargs)
-    
+
     def accepted(self, invited_user):
         """
         increment number of accepted invitations
@@ -61,12 +60,12 @@ class Invitation(models.Model):
                                          inviting_user=self.user,
                                          invited_user=invited_user)
     accepted.alters_data = True
-        
+
     def send_email(self, request=None):
         """
-        Send invitation email.        
+        Send invitation email.
         ``invitation.signals.invitation_sent`` is sent on completion.
-        """                
+        """
         if Site._meta.installed:
             site = Site.objects.get_current()
         elif request is not None:
@@ -76,11 +75,11 @@ class Invitation(models.Model):
                                    invitation_context)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
-        message = render_to_string('iinvite_registration/invitation_email.txt', 
+        message = render_to_string('iinvite_registration/invitation_email.txt',
                                    invitation_context)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
-        signals.invitation_sent.send(sender=self)    
-        
+        signals.invitation_sent.send(sender=self)
+
 class InvitationUse(models.Model):
     """
     Invitation use of user.
@@ -90,15 +89,15 @@ class InvitationUse(models.Model):
     available = models.IntegerField(_(u'available invitations'),
                                     default=INITIAL_NUMBER_INVITATIONS)
     sent = models.IntegerField(_(u'invitations sent'), default=0)
-    accepted = models.IntegerField(_(u'invitations accepted'), default=0)  
-    
+    accepted = models.IntegerField(_(u'invitations accepted'), default=0)
+
     def __unicode__(self):
         return _(u'invitation use for %(username)s') % {
                                                'username': self.user.username}
-    
+
     def can_send(self):
-        return True if self.available > 0 else False    
-    
+        return True if self.available > 0 else False
+
     def add_sent(self):
         """
         user sent an invitation
@@ -106,12 +105,12 @@ class InvitationUse(models.Model):
         self.available -= 1
         self.sent += 1
         self.save()
-    add_sent.alters_data = True 
-    
+    add_sent.alters_data = True
+
     def add_accepted(self):
         """
-        a new invitation has been accepted                
-        """       
-        self.accepted += 1        
-        self.save()        
+        a new invitation has been accepted
+        """
+        self.accepted += 1
+        self.save()
     add_accepted.alters_data = True

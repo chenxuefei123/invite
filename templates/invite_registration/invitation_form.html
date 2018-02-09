@@ -1,0 +1,9 @@
+<div class='RegistrationBox text-center'>
+  <form class="Registration" method="post" action="/invite/invite/">
+    {% csrf_token %}
+    <div><label>Email</label></div>
+    <div>{{ form.email }}</div>
+    <div>
+      <input class='RegistrationButton' type="submit" value="Invite" />
+    </div>
+</div>

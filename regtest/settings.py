@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'registration',
     'invite_registration',
 ]
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'regtest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,6 +88,10 @@ DATABASES = {
         'PORT': os.environ.get('LAICODE_DB_PORT', 3306),
     }
 }
+
+REGISTRATION_BACKENDS = (
+    'invite_registration.backends.invite_only.InviteOnlyBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
