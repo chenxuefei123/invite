@@ -1,0 +1,9 @@
+Welcome to LaiCode, {{ username }},
+
+To start cracking hundreds of coding problems, Please use the link below to activate your account:
+
+https://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+and happy coding!
+
+LaiCode Team

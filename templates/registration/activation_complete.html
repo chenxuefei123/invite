@@ -1,0 +1,14 @@
+{% extends "registration/base_message.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h1 class="main-title">
+  Account Activated
+</h1>
+<p>
+  Congratulations! Your LaiCode account has been activated successfully. Now
+  <a href="{% url 'auth_login' %}">sign in</a> and start coding!
+</p>
+
+{% endblock %}

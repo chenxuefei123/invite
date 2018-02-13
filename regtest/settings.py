@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'registration',
-    'invite_registration',
+    'invite',
 ]
 
 SITE_ID = 1
@@ -72,8 +72,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'regtest.wsgi.application'
-
+WSGI_APPLICATION = 'regtest.wsgi.application
+ACCOUNT_ACTIVATION_DAYS=9999
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -88,10 +88,6 @@ DATABASES = {
         'PORT': os.environ.get('LAICODE_DB_PORT', 3306),
     }
 }
-
-REGISTRATION_BACKENDS = (
-    'invite_registration.backends.invite_only.InviteOnlyBackend',
-)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

@@ -1,0 +1,62 @@
+{% extends "registration/base_login.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h1 class="main-title">
+  Sign In
+</h1>
+
+{% if True %}
+<p>
+  Don't have LaiCode account? <a href="{% url 'registration_register' %}">Create an Account</a>.
+</p>
+{%endif%}
+
+<form class="ant-form ant-form-vertical form" method="post" action="{% url 'auth_login' %}">
+  {% csrf_token %}
+  <div class="ant-row ant-form-item">
+    <div class="ant-form-item-label">
+      <label title="Email">Your Email Address</label>
+    </div>
+    <div class="ant-form-item-control-wrapper">
+      <div class="ant-form-item-control">
+        {{ form.username }}
+      </div>
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-form-item-label">
+      <label title="Password">Your Password</label>
+    </div>
+    <div class="ant-form-item-control-wrapper">
+      <div class="ant-form-item-control">
+        {{ form.password }}
+      </div>
+    </div>
+  </div>
+  <div class="ant-row ant-form-item ant-form-explain">
+    {% if form.errors %}
+      Incorrect email or password
+    {% endif %}
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-form-item-control-wrapper">
+      <div class="ant-form-item-control">
+        <button type="submit" class="ant-btn form-button ant-btn-primary ant-btn-lg">
+          Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<form class="action-form" method="post" action="{% url 'password_reset' %}">
+  {% csrf_token %}
+  <button type="submit" class="ant-btn btn-link">
+    Forgot your password?
+  </button>
+</form>
+
+{% endblock %}

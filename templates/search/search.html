@@ -1,0 +1,37 @@
+{% extends 'laicode/base.html' %}
+{% load staticfiles %}
+{% load laicode_utils %}
+
+{%block content %}
+<div class="main-container container-fluid">
+  <div class="main-pane">
+    <div class="content-pane text-pane">
+      <div class="search-category">People</div>
+      {% for result in page %}
+        {%with result.object as o%}
+        {%if o|classname == 'UserProfile' %}
+        <div class="clearfix search-user-entry" data-uid="{{o.uid.id}}">
+          <div class="avatar-pane"></div>
+          <div class="info-pane">
+            <div>{{o.uid.first_name}} {{o.uid.last_name}}</div>
+          </div>
+        </div>
+        {%endif%}
+        {%endwith%}
+      {% empty %}
+          <p>No results found.</p>
+      {% endfor %}
+      {% if page.has_previous or page.has_next %}
+          <div>
+              {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+              |
+              {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+          </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+{%block script_after%}
+<script type="text/javascript" src="{%static 'js/search.js'%}"></script>
+{%endblock%}

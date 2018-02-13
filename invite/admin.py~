@@ -1,0 +1,16 @@
+from django.contrib import admin
+from invite.models import InvitationCode
+from django.forms import ModelForm
+
+class InvitationCodeForm(ModelForm):
+    class Meta:
+        model = InvitationCode
+        fields = ['code', 'user', 'email', 'status', 'date_invited']
+
+class InvitationCodeAdmin(admin.ModelAdmin):
+    readonly_fields = ['code',]
+    list_display = ['code', 'user', 'email', 'status', 'date_invited']
+    search_fields = ['user__name']
+    form = InvitationCodeForm
+
+admin.site.register(InvitationCode, InvitationCodeAdmin)    

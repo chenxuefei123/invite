@@ -1,0 +1,23 @@
+{% extends "registration/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class='center error'>
+  {{ error }}
+</div>
+
+<div class='RegistrationBox center'>
+  <form class="Registration" method="post" action="">
+    {% csrf_token %}
+    <div><label>Username</label></div>
+    <div><input id="id_username" maxlength="254" name="username" type="text" value="{{username}}" /></div>
+    <div>
+      <input class='RegistrationButton' type="submit" value="Register" />
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+
+</div>
+
+{% endblock %}

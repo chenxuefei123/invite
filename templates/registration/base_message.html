@@ -1,0 +1,21 @@
+{% extends "laicode/index.html" %}
+{% load staticfiles %}
+
+{% block scriptsOrStyles %}
+<link rel="stylesheet" type="text/css" href={% static "styles/account.css" %}>
+{% endblock %}
+
+{% block body %}
+<div class="message-container">
+  <div class="logo-container">
+    <a class="logo" href="/">
+      <img src={% static "images/logo-full.svg" %} alt="LaiCode logo">
+    </a>
+  </div>
+
+  <div class="content-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

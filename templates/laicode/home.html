@@ -1,0 +1,88 @@
+{% extends "laicode/index.html" %}
+{% load staticfiles %}
+
+{% block scriptsOrStyles %}
+<link rel="stylesheet" type="text/css" href={% static "styles/home.css" %}>
+{% endblock %}
+
+{% block body %}
+<div class="home-container">
+  <header id="header" class="nav-container">
+    <a class="logo" href="/">
+      <img src={% static "images/logo-full.svg" %} alt="LaiCode logo">
+    </a>
+    <nav>
+      <a class="ant-btn btn-link" href="{% url 'auth_login' %}" style="margin-right: 12px;">Sign In</a>
+      <a class="ant-btn ant-btn-primary" href="{% url 'registration_register' %}">Get Started</a>
+    </nav>
+  </header>
+  <section class="parallax">
+    <div class="background"></div>
+    <h1>The Best Platform to Get You Ready for Technical Interviews</h1>
+    <p>Hundreds of coding problems to polish your Algorithem, Object-oriented Programming and Problem Solving skills</p>
+    <a class="ant-btn ant-btn-primary ant-btn-lg" href="{% url 'registration_register' %}">Get Started</a>
+  </section>
+  <section class="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="timeline-item">
+      <div class="content">
+        <h3>Personalized Training Plan</h3>
+        <p>Follow a coding training plan customized to your personal background and interests.</p>
+      </div>
+      <div class="timeline">
+        <div class="dot"></div>
+        <div class="line"></div>
+      </div>
+      <div class="graph">
+        <img src={% static "images/training-plan.svg" %} alt="Training Plan" />
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="graph">
+        <img src={% static "images/practice.svg" %} alt="Practice" />
+      </div>
+      <div class="timeline">
+        <div class="dot"></div>
+        <div class="line"></div>
+      </div>
+      <div class="content">
+        <h3>Practice</h3>
+          Solve classical and lasted coding problems from top-teir tech companies' technical interviews. Receive instant code validation in an interactive environment.
+        </p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="content">
+        <h3>Track</h3>
+        <p>Keep track of your progress along the way. Visualize all the hits and misses so you can adjust your focus areas and get better results.</p>
+      </div>
+      <div class="timeline">
+        <div class="dot"></div>
+        <div class="line"></div>
+      </div>
+      <div class="graph">
+        <img src={% static "images/track.svg" %} alt="Track" />
+      </div>
+    </div>
+  </section>
+  <footer>
+    &copy; 2018 LaiOffer
+  </footer>
+</div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    var header = document.getElementById('header');
+    console.log(header)
+
+    document.addEventListener('scroll', function() {
+      if (window.scrollY < 32) {
+        header.classList.remove('active');
+        return;
+      }
+
+      header.classList.add('active');
+    });
+  }
+</script>
+{% endblock %}

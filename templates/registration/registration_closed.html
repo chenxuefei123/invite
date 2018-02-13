@@ -1,11 +1,11 @@
-{% load i18n %}
-
-{% block title %}{% trans "Registration is closed" %}{% endblock %}
+{% extends "registration/base_message.html" %}
 
 {% block content %}
-<div class="main-container container-fluid">
-  <div class="content-pane text-pane">
-    <p>{% trans "Sorry, but registration is closed at this moment. Come back later." %}</p>
-  </div>
-</div>
+<h1 class="main-title">
+  Cannot Create Account
+</h1>
+<p>
+  Unfortunately we are not open for public registration at this moment. Please reach out to
+  <a href="mailto:laicode-support@laioffer.com">laicode-support@laioffer.com</a> for more information.
+</p>
 {% endblock %}

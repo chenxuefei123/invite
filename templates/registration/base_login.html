@@ -1,0 +1,22 @@
+{% extends "laicode/index.html" %}
+{% load staticfiles %}
+
+{% block scriptsOrStyles %}
+<link rel="stylesheet" type="text/css" href={% static "styles/account.css" %}>
+{% endblock %}
+
+{% block body %}
+<div class="login-container">
+  <div class="logo-container">
+    <a class="logo" href="/">
+      <img src={% static "images/logo-full.svg" %} alt="LaiCode logo">
+    </a>
+    <h2>The best platform to get you ready for technical interviews.</h2>
+  </div>
+
+  <div class="content-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

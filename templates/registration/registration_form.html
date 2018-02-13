@@ -1,0 +1,46 @@
+{% extends "registration/base_login.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<h1 class="main-title">
+  Create an Account
+</h1>
+
+{% if True %}
+<p>
+  Already have an account? <a href="{% url 'auth_login' %}">Sign In</a>.
+</p>
+{%endif%}
+
+<form class="ant-form ant-form-vertical form" method="post" action="">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="ant-row ant-form-item">
+      <div class="ant-form-item-label">
+        {{ field.label_tag }}
+      </div>
+      <div class="ant-form-item-control-wrapper">
+        <div class="ant-form-item-control">
+          {{ field }}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="ant-row ant-form-item ant-form-explain">
+    {% if form.errors %}
+      {{ form.errors }}
+    {% endif %}
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-form-item-control-wrapper">
+      <div class="ant-form-item-control">
+        <button type="submit" class="ant-btn form-button ant-btn-primary ant-btn-lg">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

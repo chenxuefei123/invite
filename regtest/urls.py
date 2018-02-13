@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from invite.views import RegistrationViewUniqueEmail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('invite/', include('invite_registration.urls')),
-    url(r'^accounts/', include('invite_registration.backends.invite_only.urls')),
+    url(r'^accounts/registerx/', RegistrationViewUniqueEmail.as_view(),
+        name='registration_register'),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]

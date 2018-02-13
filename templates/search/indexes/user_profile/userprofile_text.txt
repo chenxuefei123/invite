@@ -1,0 +1,12 @@
+{{ object.uid.first_name }} {{ object.uid.last_name }}
+{{ object.uid.email }}
+{% for e in object.education %}
+{{e.school}}
+{{e.degree}}
+{{e.description}}
+{% endfor %}
+{% for e in object.experiences %}
+{{e.company}}
+{{e.title}}
+{{e.description}}
+{% endfor %}
