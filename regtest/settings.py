@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'regtest.wsgi.application
+WSGI_APPLICATION = 'regtest.wsgi.application'
 ACCOUNT_ACTIVATION_DAYS=9999
 
 # Database
@@ -126,3 +126,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = os.environ.get('DJANGO_EMAIL_PORT', 587)
+EMAIL_USE_TLS = bool(os.environ.get('DJANGO_EMAIL_USE_TLS'))
+
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')

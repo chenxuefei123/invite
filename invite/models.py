@@ -47,8 +47,8 @@ class MyRegistrationForm(RegistrationFormUniqueEmail):
             )
 
         try:
-            invitations = Invitation.objects.get(user_id=invitor_obj.id).count()
-            if invitations >= INVITATIONS: 
+            invitations = Invitation.objects.filter(user_id=invitor_obj.id).count()
+            if invitations >= self.MAX_INVITATIONS: 
                 raise forms.ValidationError(
                     self.error_messages['no_more_invitation'],
                     code='no_more_invitation',
